@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Whisky Inventory",
+  "name": "An app that shows my inventory of whiskys",
+  "description": "This is a project for school",
+  "orientation": "Any",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +20,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "homepage_url": "https://whisky.mdecat.be",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1D252A",
+  "background_color": "#A1D7FA"
 }

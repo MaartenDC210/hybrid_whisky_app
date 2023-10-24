@@ -11,7 +11,7 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -50,9 +50,9 @@ registerRoute(
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
-    cacheName: 'images',
+  ({ url }) => url.origin === url.pathname.endsWith('/inventory'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new CacheFirst({
+    cacheName: 'inventory',
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used images are removed.
@@ -61,11 +61,42 @@ registerRoute(
   })
 );
 
-// This allows the web app to trigger skipWaiting via
-// registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+// registerRoute(
+//   // Add in any other file extensions or routing criteria as needed.
+//   ({ url }) => url.origin === url.pathname.endsWith('/empty-bottle'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+//   new StaleWhileRevalidate({
+//     cacheName: 'empty-bottle',
+//     plugins: [
+//       // Ensure that once this runtime cache reaches a maximum size the
+//       // least-recently used images are removed.
+//       new ExpirationPlugin({ maxEntries: 50 }),
+//     ],
+//   })
+// );
+const cacheName = "Inventory"
+self.addEventListener('fetch', (event) => {
+  // Check if this is a request for an image
+  if (event.request.url.pathname.endsWith('/inventory')) {
+    event.respondWith(caches.open(cacheName).then((cache) => {
+      // Go to the cache first
+      return cache.match(event.request.url).then((cachedResponse) => {
+        // Return a cached response if we have one
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        // Otherwise, hit the network
+        return fetch(event.request).then((fetchedResponse) => {
+          // Add the network response to the cache for later visits
+          cache.put(event.request, fetchedResponse.clone());
+
+          // Return the network response
+          return fetchedResponse;
+        });
+      });
+    }));
+  } else {
+    return;
   }
 });
 
