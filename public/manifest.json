@@ -23,6 +23,22 @@
   "start_url": "/",
   "homepage_url": "https://whisky.mdecat.be",
   "display": "standalone",
-  "theme_color": "#1D252A",
-  "background_color": "#A1D7FA"
+  "theme_color": "#a16400",
+  "background_color": "#A1D7FA",
+  "shortcuts" : [
+    {
+      "name": "Inventory",
+      "url": "/inventory",
+      "description": "Whisky inventory"
+    },
+    {
+      "name": "Recommended",
+      "url": "/recommendations",
+      "description": "Whisky recommendations"
+    },
+    {
+      "name": "Empty bottles",
+      "url": "/empty-bottles"
+    }
+  ]
 }

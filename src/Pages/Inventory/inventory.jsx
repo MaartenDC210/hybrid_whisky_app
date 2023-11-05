@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { firestoreDB } from "../../Firebase/initialize";
 import { useCollectionData } from "react-firebase-hooks/firestore"
@@ -43,10 +43,18 @@ export const Inventory = () => {
     {
       !ownedWhiskys ? 
         <Typography> no data </Typography> :
-        ownedWhiskys.map( (whisky) => (
-          <WhiskyCard whisky={whisky}></WhiskyCard>
+        <Grid container spacing={2}>
+        {
+        ownedWhiskys.map( (whisky, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <WhiskyCard whisky={whisky}></WhiskyCard>
+          </Grid>
           )
         )
+        }
+        </Grid>
+        
     }
+    
   </Box>;
 };

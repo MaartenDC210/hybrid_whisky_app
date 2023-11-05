@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MuiAppBar, { AppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -20,8 +20,8 @@ import LiquorIcon from '@mui/icons-material/Liquor';
 import UndoIcon from '@mui/icons-material/Undo';
 import StarIcon from '@mui/icons-material/Star';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { FC } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button'
 
 
 const drawerWidth = 240;
@@ -144,29 +144,29 @@ export const SideBar = () => {
     }, [location.pathname]);
 
     return (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex" }} >
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar position="fixed" open={open} style={{background: "#a16400"}}>
             <Toolbar>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{
-                marginRight: 5,
-                ...(open && { display: "none" }),
-                }}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-                { pageTitle }
-            </Typography>
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    sx={{
+                    marginRight: 5,
+                    ...(open && { display: "none" }),
+                    }}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" noWrap component="div">
+                    { pageTitle }
+                </Typography>
             </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
-            <DrawerHeader>
+        <Drawer variant="permanent" open={open} >
+            <DrawerHeader style={{ background: "#a16400"}}>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === "rtl" ? (
                     <ChevronRightIcon />
@@ -175,7 +175,7 @@ export const SideBar = () => {
                     )}
                 </IconButton>
             </DrawerHeader>
-            <Divider />
+            <Box style={{ background: "#db8902"}} flex={12}>
             <List>
                 <ListItem 
                 disablePadding sx={{ display: "block" }}
@@ -246,34 +246,34 @@ export const SideBar = () => {
                         <ListItemText primary={"Recommendations"} sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>
                 </ListItem>
-            </List>
-            <Divider />
-            <List>
-            
                 <ListItem 
-                    disablePadding sx={{ display: "block" }}
-                    onClick={() => onclick("/login")}
-                >
-                    <ListItemButton
-                        sx={{
-                        minHeight: 48,
-                        justifyContent: open ? "initial" : "center",
-                        px: 2.5,
-                        }}
+                        disablePadding 
+                        sx={{ display: "block", position:'fixed', top: 'auto', bottom: 0 }}
+                        onClick={() => onclick("/login")}
                     >
-                        <ListItemIcon
-                        sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : "auto",
-                            justifyContent: "center",
-                        }}
+                        <ListItemButton
+                            sx={{
+                            minHeight: 48,
+                            justifyContent: open ? "initial" : "center",
+                            px: 2.5,
+                            }}
                         >
-                            <AccountCircleIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={"Login"} sx={{ opacity: open ? 1 : 0 }} />
-                    </ListItemButton>
+                            <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : "auto",
+                                justifyContent: "center",
+                            }}
+                            >
+                                <AccountCircleIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={"Login"} sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
                 </ListItem>
             </List>
+            
+            </Box>
+            
         </Drawer>
         </Box>
     );

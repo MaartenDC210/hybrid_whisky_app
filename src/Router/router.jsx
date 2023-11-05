@@ -21,32 +21,32 @@ export const router = createBrowserRouter([
           element: <Home/>,
         },
         {
-          path: "inventory",
+          path: "/inventory",
           element: 
             <AuthRoute>
               <Inventory/>
             </AuthRoute>,
         },
         {
-          path: "empty-bottles",
+          path: "/empty-bottles",
           element: 
           <AuthRoute>
             <EmptyBottles/>
           </AuthRoute>,
         },
         {
-          path: "recommendations",
+          path: "/recommendations",
           element: 
           <AuthRoute>
             <Recommendations/>
           </AuthRoute>,
         },
         {
-          path:"whisky-details",
+          path:"/whisky-details",
           element: <WhiskyDetails/>,
         },
         {
-          path: "login",
+          path: "/login",
           element: 
           <AuthRoute>
             <Login />

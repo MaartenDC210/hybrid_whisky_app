@@ -5,11 +5,11 @@ import { Grid } from "@mui/material";
 
 export const MainLayout = () => {
     return (
-        <Box style={{display:"flex"}} bgcolor="#E8e1e2">
+        <Box style={{display:"flex", background: "#fceed7", height:"100vh"}} >
             <SideBar/>
             <Grid container>
-                <Grid item xs={12} maxHeight={"10"} sx={{pt: 8}}>
-                    <Box style={{padding:"25px", height:"calc(100vh - 64px)"}}>
+                <Grid item xs={12} sx={{pt: 8}}>
+                    <Box style={{padding:"25px", maxHeight:"calc(100vh - 64)", maxWidth:"calc(100vw-25px)"}}>
                         <Outlet/>
                     </Box>
                 </Grid>

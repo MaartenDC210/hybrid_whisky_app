@@ -5,7 +5,7 @@ export const WhiskyCard = (props) => {
     const navigate = useNavigate();
     const whisky = props.whisky;
     return <Box>
-        <Card sx={{ width: 300 , margin: 2 }}>
+        <Card sx={{ minWidth: 300, maxWidth: 545, margin: 2 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {whisky.distillery}
