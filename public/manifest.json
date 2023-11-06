@@ -21,7 +21,7 @@
     }
   ],
   "start_url": "/",
-  "homepage_url": "https://whisky.mdecat.be",
+  "homepage_url": "https://hybrid-whisky-app.vercel.app",
   "display": "standalone",
   "theme_color": "#a16400",
   "background_color": "#A1D7FA",
